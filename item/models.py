@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+import uuid
 
 class Category(models.Model):
     name=models.CharField(max_length=255)
@@ -13,6 +13,7 @@ class Category(models.Model):
     
 
 class Item(models.Model):
+    id=models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)
     category=models.ForeignKey(Category,related_name='items',on_delete=models.PROTECT)
     name=models.CharField(max_length=255)
     description=models.TextField(blank=True,null=True)
